@@ -17,16 +17,11 @@ class App(customtkinter.CTk):
     DiceTypeVAL="D4"
     DamageModVAL = 0
     AttackModVAL = 0
-    diceimgd4 = ImageTk.PhotoImage(Image.open("D4.png"))
-    diceimgd6 = ImageTk.PhotoImage(Image.open("D6.png"))
-    diceimgd8 = ImageTk.PhotoImage(Image.open("D8.png"))
-    diceimgd10 = ImageTk.PhotoImage(Image.open("D10.png"))
-    diceimgd12 = ImageTk.PhotoImage(Image.open("D12.png"))
-    diceimgd20 = ImageTk.PhotoImage(Image.open("D20.png"))
+
+
 
     def __init__(self):
         super().__init__()
-
 
         # configure window
         self.title("CustomTkinter complex_example.py")
@@ -172,7 +167,12 @@ class App(customtkinter.CTk):
         )
         self.AttackModValLable.grid(row=4,column=2)
 
+        #Dice Image
+        DiceTypeImage = customtkinter.CTkImage(light_image=Image.open(os.path.join("D4.png")), size=(60 , 60))
+        self.DiceTypeImageLable = customtkinter.CTkLabel(self.sidebar_frame,image=DiceTypeImage, text='')
+        self.DiceTypeImageLable.grid(column=4, row=2,pady=10,padx=10,)
 
+        
         # set default values
 
         #Button commands
