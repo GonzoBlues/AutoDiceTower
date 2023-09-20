@@ -1,14 +1,32 @@
 import tkinter
 import tkinter.messagebox
 import customtkinter
+from PIL import ImageTk, Image
+import os
+
+#changes directory
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 
 class App(customtkinter.CTk):
+    dicetypes=["D4","D6","D8","D10","D12"]
+    currentDice = 0
+    DiceTypeVAL="D4"
+    DamageModVAL = 0
+    AttackModVAL = 0
+    diceimgd4 = ImageTk.PhotoImage(Image.open("D4.png"))
+    diceimgd6 = ImageTk.PhotoImage(Image.open("D6.png"))
+    diceimgd8 = ImageTk.PhotoImage(Image.open("D8.png"))
+    diceimgd10 = ImageTk.PhotoImage(Image.open("D10.png"))
+    diceimgd12 = ImageTk.PhotoImage(Image.open("D12.png"))
+    diceimgd20 = ImageTk.PhotoImage(Image.open("D20.png"))
+
     def __init__(self):
         super().__init__()
+
 
         # configure window
         self.title("CustomTkinter complex_example.py")
@@ -131,35 +149,76 @@ class App(customtkinter.CTk):
             font=("Times",-30)
             )
         self.DamageModLable.grid(row=5,column=1,pady=0,columnspan=3)  
-        dicetypeVAL="D4"
+
         #numbers for the 3 Values
         self.dicetypeValLable = customtkinter.CTkLabel(
             self.sidebar_frame,
-            text=dicetypeVAL,
+            text=self.DiceTypeVAL,
             font=("Times",-30)
         )
         self.dicetypeValLable.grid(row=2,column=2)
+
+        self.DamageModValLable = customtkinter.CTkLabel(
+            self.sidebar_frame,
+            text=self.DamageModVAL,
+            font=("Times",-30)
+        )
+        self.DamageModValLable.grid(row=6,column=2)
+
+        self.AttackModValLable = customtkinter.CTkLabel(
+            self.sidebar_frame,
+            text=self.AttackModVAL,
+            font=("Times",-30)
+        )
+        self.AttackModValLable.grid(row=4,column=2)
+
+
         # set default values
 
         #Button commands
-    def DiceTypeIncButton(slef):
-        print("DiceTypeInc")
-        #work on this next
-        ##
+    def DiceTypeIncButton(self):
+        if (self.currentDice) >= 4:
+            self.currentDice = 0
+        else:
+            self.currentDice += 1
+        self.dicetypeValLable.configure(text=(self.dicetypes[self.currentDice]))
+
+    def DiceTypeDecButton(self):
+        if (self.currentDice) <= 0:
+            self.currentDice = 4
+        else:
+            self.currentDice -= 1
+        self.dicetypeValLable.configure(text=(self.dicetypes[self.currentDice]))
 
 
+    def AttackModIncButton(self):
+        self.AttackModVAL += 1
+        if self.AttackModVAL > 0:
+            self.AttackModValLable.configure(text="+" + str(self.AttackModVAL))
+        else:
+            self.AttackModValLable.configure(text=self.AttackModVAL)
 
-        ##
-    def DiceTypeDecButton(slef):
-        print("DiceTypeDec")
-    def AttackModIncButton(slef):
-        print("AttackModInc")
-    def AttackModDecButton(slef):
-        print("AttackModDec")
+    def AttackModDecButton(self):
+        self.AttackModVAL -= 1
+        if self.AttackModVAL > 0:
+            self.AttackModValLable.configure(text="+" + str(self.AttackModVAL))
+        else:
+            self.AttackModValLable.configure(text=self.AttackModVAL)
+
+
     def DamageModIncButton(self):
-        print("DamageModInc")
+        self.DamageModVAL += 1
+        if self.DamageModVAL > 0:
+            self.DamageModValLable.configure(text="+" + str(self.DamageModVAL))
+        else:
+            self.DamageModValLable.configure(text=self.DamageModVAL)
+
     def DamageModDecButton(self):
-        print("DamageModDec")
+        self.DamageModVAL -= 1
+        if self.DamageModVAL > 0:
+            self.DamageModValLable.configure(text="+" + str(self.DamageModVAL))
+        else:
+            self.DamageModValLable.configure(text=self.DamageModVAL)
 
 if __name__ == "__main__":
     app = App()
