@@ -42,15 +42,20 @@ class App(customtkinter.CTk):
         self.grid_rowconfigure((0, 1, 2), weight=1)
 
         # create sidebar frame with widgets
-        self.sidebar_frame = customtkinter.CTkFrame(self, width=110, corner_radius=0)
-        self.sidebar_frame.grid(row=0, column=0, rowspan=7, sticky="nsew")
-        self.sidebar_frame.grid_rowconfigure(7, weight=1)
+        self.sidebarFrame = customtkinter.CTkFrame(self, width=110, corner_radius=0)
+        self.sidebarFrame.grid(row=0, column=0, rowspan=7, sticky="nsew")
+        self.sidebarFrame.grid_rowconfigure(7, weight=1)
 
+        #creat Title Bar
+        self.TitleBar = customtkinter.CTkFrame(self, height= 70,width=480,fg_color="black",corner_radius=0)
+        self.TitleBar.grid(row=0,column = 0,columnspan = 7,sticky ="n")
+        self.TitleBarLable = customtkinter.CTkLabel(self.TitleBar,text_color= "Blue",text ="Auto Dice Tower",height=70,width=480,font=("Times",-60))
+        self.TitleBarLable.grid(row=0,column = 0,columnspan = 7,sticky ="n")
         #Side bar buttons
 
         #Dicetype
         self.dicetypedec = customtkinter.CTkButton(
-            self.sidebar_frame,
+            self.sidebarFrame,
             command=self.DiceTypeDecButton,
             text="<",
             width=50,
@@ -59,7 +64,7 @@ class App(customtkinter.CTk):
             )
         self.dicetypedec.grid(row=2,column=1, padx=10,pady=0)
         self.dicetypeinc = customtkinter.CTkButton(
-            self.sidebar_frame,
+            self.sidebarFrame,
             command=self.DiceTypeIncButton,
             text=">",
             width=50,
@@ -70,7 +75,7 @@ class App(customtkinter.CTk):
 
         #Attackmod
         self.AttackModdec = customtkinter.CTkButton(
-            self.sidebar_frame,
+            self.sidebarFrame,
             command=self.AttackModDecButton,
             text="<",
             width=50,
@@ -79,7 +84,7 @@ class App(customtkinter.CTk):
             )
         self.AttackModdec.grid(row=4,column=1, padx=10,pady=0)
         self.AttackModinc = customtkinter.CTkButton(
-            self.sidebar_frame,
+            self.sidebarFrame,
             command=self.AttackModIncButton,
             text=">",
             width=50,
@@ -90,7 +95,7 @@ class App(customtkinter.CTk):
 
         #Damagemod
         self.DamageModdec = customtkinter.CTkButton(
-            self.sidebar_frame,
+            self.sidebarFrame,
             command=self.DamageModDecButton,
             text="<",
             width=50,
@@ -100,7 +105,7 @@ class App(customtkinter.CTk):
             )
         self.DamageModdec.grid(row=6,column=1, padx=10,pady=0)
         self.DammafeModinc = customtkinter.CTkButton(
-            self.sidebar_frame,
+            self.sidebarFrame,
             command=self.DamageModIncButton,
             text=">",
             width=50,
@@ -113,23 +118,23 @@ class App(customtkinter.CTk):
         #sidebartext
         #spacers
         self.spacerLable = customtkinter.CTkLabel(
-            self.sidebar_frame,
+            self.sidebarFrame,
             text="",
             )
         self.spacerLable.grid(row=0,column=0,pady=20)
         self.spacerLeftSideLable = customtkinter.CTkLabel(
-            self.sidebar_frame,
+            self.sidebarFrame,
             text="",
             )
         self.spacerLeftSideLable.grid(row=0,column=4,padx=10,rowspan=6)
         self.spacerRightSideLable = customtkinter.CTkLabel(
-            self.sidebar_frame,
+            self.sidebarFrame,
             text="",
             )
         self.spacerRightSideLable.grid(row=0,column=0,padx=10,rowspan=6)
         #dicetype
         self.DiceTypeLable = customtkinter.CTkLabel(
-            self.sidebar_frame,
+            self.sidebarFrame,
             text="Damage Dice",
             anchor="s",
             font=("Times",-30)
@@ -138,7 +143,7 @@ class App(customtkinter.CTk):
 
         #Attack modifer
         self.AttackModLable = customtkinter.CTkLabel(
-            self.sidebar_frame,
+            self.sidebarFrame,
             text="Attack Modifer",
             anchor="s",
             font=("Times",-30)
@@ -147,7 +152,7 @@ class App(customtkinter.CTk):
 
         #Damage modifer
         self.DamageModLable = customtkinter.CTkLabel(
-            self.sidebar_frame,
+            self.sidebarFrame,
             text="Damage Modifer",
             anchor="s",
             font=("Times",-30)
@@ -156,21 +161,21 @@ class App(customtkinter.CTk):
 
         #numbers for the 3 Values
         self.dicetypeValLable = customtkinter.CTkLabel(
-            self.sidebar_frame,
+            self.sidebarFrame,
             text=self.DiceTypeVAL,
             font=("Times",-30)
         )
         self.dicetypeValLable.grid(row=2,column=2)
 
         self.DamageModValLable = customtkinter.CTkLabel(
-            self.sidebar_frame,
+            self.sidebarFrame,
             text=self.DamageModVAL,
             font=("Times",-30)
         )
         self.DamageModValLable.grid(row=6,column=2)
 
         self.AttackModValLable = customtkinter.CTkLabel(
-            self.sidebar_frame,
+            self.sidebarFrame,
             text=self.AttackModVAL,
             font=("Times",-30)
         )
@@ -178,7 +183,7 @@ class App(customtkinter.CTk):
 
         #Dice Image
         #Set Start
-        self.DiceTypeImageLable = customtkinter.CTkLabel(self.sidebar_frame,image=self.DiceTypeImageD4, text='')
+        self.DiceTypeImageLable = customtkinter.CTkLabel(self.sidebarFrame,image=self.DiceTypeImageD4, text='')
         self.DiceTypeImageLable.grid(column=4, row=2,pady=10,padx=10,)
 
         #Dice Changer
@@ -192,8 +197,6 @@ class App(customtkinter.CTk):
             self.DiceTypeImageLable.configure(image=self.DiceTypeImageD4)  # Fallback to D4 image
                     #Add an error image?
     
-        # set default values
-
         #Button commands
     def DiceTypeIncButton(self):
         if (self.currentDice) >= 4:
