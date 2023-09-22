@@ -18,6 +18,15 @@ class App(customtkinter.CTk):
     DamageModVAL = 0
     AttackModVAL = 0
 
+    #photos Import
+    DiceTypeImageD4 = customtkinter.CTkImage(light_image=Image.open(os.path.join("D4.png")), size=(60 , 60))
+    DiceTypeImageD6 = customtkinter.CTkImage(light_image=Image.open(os.path.join("D6.png")), size=(60 , 60))
+    DiceTypeImageD8 = customtkinter.CTkImage(light_image=Image.open(os.path.join("D8.png")), size=(60 , 60))
+    DiceTypeImageD10 = customtkinter.CTkImage(light_image=Image.open(os.path.join("D10.png")), size=(60 , 60))
+    DiceTypeImageD12 = customtkinter.CTkImage(light_image=Image.open(os.path.join("D12.png")), size=(60 , 60))
+
+    #Dice Dic
+    dice_image_dic = {"D4":DiceTypeImageD4,"D6": DiceTypeImageD6,"D8": DiceTypeImageD8,"D10": DiceTypeImageD10,"D12": DiceTypeImageD12}
 
 
     def __init__(self):
@@ -168,11 +177,22 @@ class App(customtkinter.CTk):
         self.AttackModValLable.grid(row=4,column=2)
 
         #Dice Image
-        DiceTypeImage = customtkinter.CTkImage(light_image=Image.open(os.path.join("D4.png")), size=(60 , 60))
-        self.DiceTypeImageLable = customtkinter.CTkLabel(self.sidebar_frame,image=DiceTypeImage, text='')
+        #Set Start
+        self.DiceTypeImageLable = customtkinter.CTkLabel(self.sidebar_frame,image=self.DiceTypeImageD4, text='')
         self.DiceTypeImageLable.grid(column=4, row=2,pady=10,padx=10,)
 
-        
+        #Dice Changer
+    def Change_diceimg(self,newDice):
+            # Check if newDice is in the dictionary
+        print (newDice)
+        if newDice in self.dice_image_dic:
+                # Configure diceImage_label with the corresponding image
+            self.DiceTypeImageLable.configure(image=self.dice_image_dic[newDice])
+        else:
+            print("Error: Invalid dice type")
+            self.DiceTypeImageLable.configure(image=self.DiceTypeImageD4)  # Fallback to D4 image
+                    #Add an error image?
+    
         # set default values
 
         #Button commands
@@ -181,7 +201,9 @@ class App(customtkinter.CTk):
             self.currentDice = 0
         else:
             self.currentDice += 1
-        self.dicetypeValLable.configure(text=(self.dicetypes[self.currentDice]))
+        newdice = self.dicetypes[self.currentDice]
+        self.dicetypeValLable.configure(text = (newdice))
+        self.Change_diceimg(self.dicetypes[self.currentDice])
 
     def DiceTypeDecButton(self):
         if (self.currentDice) <= 0:
