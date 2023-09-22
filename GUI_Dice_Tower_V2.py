@@ -184,7 +184,6 @@ class App(customtkinter.CTk):
         #Dice Changer
     def Change_diceimg(self,newDice):
             # Check if newDice is in the dictionary
-        print (newDice)
         if newDice in self.dice_image_dic:
                 # Configure diceImage_label with the corresponding image
             self.DiceTypeImageLable.configure(image=self.dice_image_dic[newDice])
