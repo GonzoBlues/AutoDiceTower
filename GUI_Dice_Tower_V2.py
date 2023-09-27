@@ -222,7 +222,9 @@ class App(customtkinter.CTk):
             self.currentDice = 4
         else:
             self.currentDice -= 1
-        self.dicetypeValLable.configure(text=(self.dicetypes[self.currentDice]))
+        newdice = self.dicetypes[self.currentDice]
+        self.dicetypeValLable.configure(text = (newdice))
+        self.Change_diceimg(self.dicetypes[self.currentDice])
 
 
     def AttackModIncButton(self):
