@@ -3,6 +3,7 @@ import tkinter.messagebox
 import customtkinter
 from PIL import ImageTk, Image
 import os
+from DiceTower import *
 
 #changes directory
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -17,6 +18,7 @@ class App(customtkinter.CTk):
     DiceTypeVAL="D4"
     DamageModVAL = 0
     AttackModVAL = 0
+    RolledString = ""
 
     #photos Import
     diceimagesize = 100
@@ -37,6 +39,7 @@ class App(customtkinter.CTk):
 
     def __init__(self):
         super().__init__()
+        self.Dt1 = DiceTower()
 
         # configure window
         self.title("CustomTkinter complex_example.py")
@@ -62,7 +65,25 @@ class App(customtkinter.CTk):
         self.TitleBarLable = customtkinter.CTkLabel(self.TitleBar,text_color= "Blue",text ="Auto Dice Tower",height=70,width=480,font=("Times",-60))
         self.TitleBarLable.grid(row=0,column = 0,columnspan = 7,sticky ="n")
         #Side bar buttons
+        self.Roll = customtkinter.CTkButton(
+            self.rightImages,
+            command=self.RollDice,
+            text="Roll",
+            width=50,
+            height=20,
+            font=("Times",-50),
+        )
+        self.Roll.grid(row=1,column=0)
 
+        self.RolledOut = customtkinter.CTkLabel(
+            self.rightImages,
+            text="text",
+            width=50,
+            height=20,
+            font=("Times",-50),
+        )
+        self.RolledOut.grid(row=2,column=0)
+           
         #Dicetype
         self.dicetypedec = customtkinter.CTkButton(
             self.mainSection,
@@ -206,7 +227,12 @@ class App(customtkinter.CTk):
             print("Error: Invalid dice type")
             self.DiceTypeImageLable.configure(image=self.DiceTypeImageD4)  # Fallback to D4 image
                     #Add an error image?
-    
+
+    def RollDice(self):
+       self.Dt1.GetRoll()
+       self.RolledString = str(self.Dt1)
+       self.RolledOut.configure(text=self.RolledString)      
+        
         #Button commands
     def DiceTypeIncButton(self):
         if (self.currentDice) >= 4:
@@ -229,6 +255,7 @@ class App(customtkinter.CTk):
 
     def AttackModIncButton(self):
         self.AttackModVAL += 1
+        self.Dt1.AddAtckMod()
         if self.AttackModVAL > 0:
             self.AttackModValLable.configure(text="+" + str(self.AttackModVAL))
         else:
@@ -236,6 +263,7 @@ class App(customtkinter.CTk):
 
     def AttackModDecButton(self):
         self.AttackModVAL -= 1
+        self.Dt1.SubAtckMod()
         if self.AttackModVAL > 0:
             self.AttackModValLable.configure(text="+" + str(self.AttackModVAL))
         else:
@@ -244,12 +272,14 @@ class App(customtkinter.CTk):
 
     def DamageModIncButton(self):
         self.DamageModVAL += 1
+        self.Dt1.AddDamMod()
         if self.DamageModVAL > 0:
             self.DamageModValLable.configure(text="+" + str(self.DamageModVAL))
         else:
             self.DamageModValLable.configure(text=self.DamageModVAL)
 
     def DamageModDecButton(self):
+        self.Dt1.SubDamMod()
         self.DamageModVAL -= 1
         if self.DamageModVAL > 0:
             self.DamageModValLable.configure(text="+" + str(self.DamageModVAL))

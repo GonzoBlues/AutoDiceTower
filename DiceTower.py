@@ -15,6 +15,17 @@ class DiceTower:
                 self.DamageRoll = 1
         
         @property
+        def DamageRoll(self):
+                return self._DamageRoll
+        
+        @DamageRoll.setter
+        def DamageRoll(self, x=0):
+                if x < 0:
+                        self._DamageRoll = 0
+                else:
+                        self._DamageRoll = x
+        
+        @property
         def DiceType(self):
                 return self._DiceType
 
@@ -113,8 +124,8 @@ class DiceTower:
                 self.DiceType = type
         
         def __str__(self):
-                return ("DT:{}\tAM:{}\tDM:{}\tNA:{}\tND:{}\tAR:{}\tDR:{}".format(self.DiceType,self.AttackMod,self.DamageMod,self.NatAttack,self.NatDamage,self.AttackRoll,self.DamageRoll))
-
+                return ("Nat Attack: {}\nNat Damage: {}\nAttack Roll: {}\nDamage Roll: {}".format(self.NatAttack,self.NatDamage,self.AttackRoll,self.DamageRoll))
+'''
 #Code pass this point just test the class and makes the code usable in text input form.
 g1 = DiceTower()
 while True:
@@ -146,3 +157,4 @@ while True:
         g1.GetRoll()
         print(g1)
         print("")
+'''
