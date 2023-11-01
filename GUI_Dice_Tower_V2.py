@@ -77,10 +77,10 @@ class App(customtkinter.CTk):
 
         self.RolledOut = customtkinter.CTkLabel(
             self.rightImages,
-            text="text",
+            text="No Roll Info",
             width=50,
             height=20,
-            font=("Times",-50),
+            font=("Times",-25),
         )
         self.RolledOut.grid(row=2,column=0)
            
@@ -235,6 +235,7 @@ class App(customtkinter.CTk):
         
         #Button commands
     def DiceTypeIncButton(self):
+        self.Dt1.IncDamDie()
         if (self.currentDice) >= 4:
             self.currentDice = 0
         else:
@@ -244,6 +245,7 @@ class App(customtkinter.CTk):
         self.Change_diceimg(self.dicetypes[self.currentDice])
 
     def DiceTypeDecButton(self):
+        self.Dt1.DeIncDamDie()
         if (self.currentDice) <= 0:
             self.currentDice = 4
         else:
