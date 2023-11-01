@@ -5,7 +5,7 @@ import random
 
 #This class runs the back end for the GUI.
 class DiceTower:
-        def __init__(self, DiceType="D4", AttackMod=0, DamageMod=0, NatAttack=1, NatDamage=1):
+        def __init__(self, DiceType=0, AttackMod=0, DamageMod=0, NatAttack=1, NatDamage=1):
                 self.DiceType = DiceType
                 self.AttackMod = AttackMod
                 self.DamageMod = DamageMod
@@ -13,36 +13,15 @@ class DiceTower:
                 self.NatDamage = NatDamage
                 self.AttackRoll = 1
                 self.DamageRoll = 1
-        
-        @property
-        def DamageRoll(self):
-                return self._DamageRoll
-        
-        @DamageRoll.setter
-        def DamageRoll(self, x=0):
-                if x < 0:
-                        self._DamageRoll = 0
-                else:
-                        self._DamageRoll = x
+                self.DiceNum = [4,6,8,10,12]
         
         @property
         def DiceType(self):
                 return self._DiceType
 
         @DiceType.setter
-        def DiceType(self, Dice):
-                if Dice == "D4":
-                        self._DiceType = 4
-                elif Dice == "D6":
-                        self._DiceType = 6
-                elif Dice == "D8":
-                        self._DiceType = 8
-                elif Dice == "D10":
-                        self._DiceType = 10
-                elif Dice == "D12":
-                        self._DiceType = 12
-                else:
-                        self._DiceType = 4
+        def DiceType(self, x):
+                self._DiceType = x
         
         @property
         def AttackMod(self):
@@ -50,12 +29,7 @@ class DiceTower:
 
         @AttackMod.setter
         def AttackMod(self, Mod):
-                if Mod > 20:
-                        self._AttackMod = -20
-                elif Mod < -20:
-                        self._AttackMod = 20
-                else:
-                        self._AttackMod = Mod
+                self._AttackMod = Mod
         
         @property
         def DamageMod(self):
@@ -63,12 +37,7 @@ class DiceTower:
         
         @DamageMod.setter
         def DamageMod(self, Mod):
-                if Mod > 20:
-                        self._DamageMod = -20
-                elif Mod < -20:
-                        self._DamageMod = 20
-                else:
-                        self._DamageMod = Mod
+                self._DamageMod = Mod
 
         @property
         def NatDamage(self):
@@ -99,14 +68,29 @@ class DiceTower:
                 return self._DamageRoll
         
         @DamageRoll.setter
-        def DamageRoll(self, Damage):
-                self._DamageRoll = Damage
+        def DamageRoll(self, x = 0):
+                if x < 0:
+                        self._DamageRoll = 0
+                else:
+                        self._DamageRoll = x
         
         def GetRoll(self):
                 self.NatAttack = random.randint(1,21)
-                self.NatDamage = random.randint(1,self.DiceType)
+                self.NatDamage = random.randint(1,self.DiceNum[self.DiceType])
                 self.AttackRoll = self.NatAttack + self.AttackMod
                 self.DamageRoll = self.NatDamage + self.DamageMod
+
+        def IncDamDie(self):
+                self.DiceType += 1
+                x = self.DiceType
+                if x > 4:
+                        self.DiceType = 0
+
+        def DeIncDamDie(self):
+                self.DiceType -= 1
+                x = self.DiceType
+                if x < 0:
+                        self.DiceType = 4
         
         def AddAtckMod(self):
                 self.AttackMod += 1
@@ -124,7 +108,7 @@ class DiceTower:
                 self.DiceType = type
         
         def __str__(self):
-                return ("Nat Attack: {}\nNat Damage: {}\nAttack Roll: {}\nDamage Roll: {}".format(self.NatAttack,self.NatDamage,self.AttackRoll,self.DamageRoll))
+                return ("Nat Attack: {}\n\nNat Damage: {}\n\nAttack Roll: {}\n\nDamage Roll: {}".format(self.NatAttack,self.NatDamage,self.AttackRoll,self.DamageRoll))
 '''
 #Code pass this point just test the class and makes the code usable in text input form.
 g1 = DiceTower()
