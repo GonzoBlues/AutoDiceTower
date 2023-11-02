@@ -1,2 +1,0 @@
-# AutoDiceTower
-Automatic Dice Tower
