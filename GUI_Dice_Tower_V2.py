@@ -51,7 +51,7 @@ class App(customtkinter.CTk):
         
         #creates spot for images
         self.rightImages = customtkinter.CTkFrame(self)
-        self.rightImages.grid(row = 0,column = 1)
+        self.rightImages.grid(row = 0,column = 1,)
 
         # create sidebar frame with widgets
         self.mainSection = customtkinter.CTkFrame(self, width=110, corner_radius=0)
@@ -64,6 +64,7 @@ class App(customtkinter.CTk):
         self.TitleBarLable = customtkinter.CTkLabel(self.TitleBar,text_color= "Blue",text ="Auto Dice Tower",height=70,width=480,font=("Times",-60))
         self.TitleBarLable.grid(row=0,column = 0,columnspan = 7,sticky ="n")
         #Side bar buttons
+
         self.Roll = customtkinter.CTkButton(
             self.rightImages,
             command=self.RollDice,
@@ -72,7 +73,13 @@ class App(customtkinter.CTk):
             height=20,
             font=("Times",-50),
         )
-        self.Roll.grid(row=1,column=0)
+        self.Roll.grid(row=2,column=0,pady=20,padx=20)
+        
+        self.spacertop = customtkinter.CTkLabel(self.rightImages, text="")
+        self.spacertop.grid(row=0,column=0)
+       
+        self.spacerBottom = customtkinter.CTkLabel(self.rightImages, text="")
+        self.spacerBottom.grid(row=4,column=0)
 
         self.RolledOut = customtkinter.CTkLabel(
             self.rightImages,
@@ -81,7 +88,7 @@ class App(customtkinter.CTk):
             height=20,
             font=("Times",-25),
         )
-        self.RolledOut.grid(row=2,column=0)
+        self.RolledOut.grid(row=3,column=0,pady=20,padx=20)
            
         #Dicetype
         self.dicetypedec = customtkinter.CTkButton(
@@ -214,7 +221,7 @@ class App(customtkinter.CTk):
         #Dice Image
         #Set Start
         self.DiceTypeImageLable = customtkinter.CTkLabel(self.rightImages,image=self.DiceTypeImageD4, text='')
-        self.DiceTypeImageLable.grid(column=0, row=0,pady=0,padx=00,stick="n")
+        self.DiceTypeImageLable.grid(column=0, row=1,pady=20,padx=20,stick="s")
 
         #Dice Changer
     def Change_diceimg(self,newDice):
