@@ -75,7 +75,7 @@ class DiceTower:
                         self._DamageRoll = x
         
         def GetRoll(self):
-                self.NatAttack = random.randint(1,21)
+                self.NatAttack = random.randint(1,20)
                 self.NatDamage = random.randint(1,self.DiceNum[self.DiceType])
                 self.AttackRoll = self.NatAttack + self.AttackMod
                 self.DamageRoll = self.NatDamage + self.DamageMod
